@@ -88,6 +88,7 @@
     <Compile Include="Localization\French.cs" />
     <Compile Include="Localization\German.cs" />
     <Compile Include="Localization\Japanese.cs" />
+    <Compile Include="Localization\Russian.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
