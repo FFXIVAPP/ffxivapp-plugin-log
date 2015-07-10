@@ -1,7 +1,7 @@
 ﻿{
     "PluginInfo": {
         "Name": "FFXIVAPP.Plugin.Log",
-        "Version": "3.0.5661.34112",
+        "Version": "3.0.5668.33057",
         "Files": [
             {
                 "Name": "FFXIVAPP.Plugin.Log.dll",
