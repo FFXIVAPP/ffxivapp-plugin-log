@@ -40,10 +40,6 @@ namespace FFXIVAPP.Plugin.Log
 {
     internal static class Initializer
     {
-        #region Declarations
-
-        #endregion
-
         /// <summary>
         /// </summary>
         public static void LoadSettings()
@@ -111,5 +107,9 @@ namespace FFXIVAPP.Plugin.Log
                 ThemeHelper.SetupColor(ref flowDocument);
             }
         }
+
+        #region Declarations
+
+        #endregion
     }
 }

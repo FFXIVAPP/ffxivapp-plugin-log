@@ -39,33 +39,14 @@ namespace FFXIVAPP.Plugin.Log.ViewModels
 {
     internal sealed class SettingsViewModel : INotifyPropertyChanged
     {
-        #region Property Bindings
-
-        private static SettingsViewModel _instance;
-
-        public static SettingsViewModel Instance
-        {
-            get { return _instance ?? (_instance = new SettingsViewModel()); }
-        }
-
-        #endregion
-
-        #region Declarations
-
-        public ICommand AddTabCommand { get; private set; }
-
-        #endregion
-
         public SettingsViewModel()
         {
             AddTabCommand = new DelegateCommand(AddTab);
         }
 
-        #region Loading Functions
+        #region Declarations
 
-        #endregion
-
-        #region Utility Functions
+        public ICommand AddTabCommand { get; private set; }
 
         #endregion
 
@@ -102,6 +83,25 @@ namespace FFXIVAPP.Plugin.Log.ViewModels
                 ShellView.View.ShellViewTC.SelectedIndex = 0;
             }
         }
+
+        #endregion
+
+        #region Property Bindings
+
+        private static SettingsViewModel _instance;
+
+        public static SettingsViewModel Instance
+        {
+            get { return _instance ?? (_instance = new SettingsViewModel()); }
+        }
+
+        #endregion
+
+        #region Loading Functions
+
+        #endregion
+
+        #region Utility Functions
 
         #endregion
 

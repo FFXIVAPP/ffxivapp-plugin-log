@@ -43,6 +43,12 @@ namespace FFXIVAPP.Plugin.Log.ViewModels
 {
     internal sealed class MainViewModel : INotifyPropertyChanged
     {
+        public MainViewModel()
+        {
+            DeleteTabCommand = new DelegateCommand(DeleteTab);
+            ManualTranslateCommand = new DelegateCommand<string>(ManualTranslate);
+        }
+
         #region Property Bindings
 
         private static MainViewModel _instance;
@@ -61,12 +67,6 @@ namespace FFXIVAPP.Plugin.Log.ViewModels
         public ICommand ManualTranslateCommand { get; private set; }
 
         #endregion
-
-        public MainViewModel()
-        {
-            DeleteTabCommand = new DelegateCommand(DeleteTab);
-            ManualTranslateCommand = new DelegateCommand<string>(ManualTranslate);
-        }
 
         #region Loading Functions
 
