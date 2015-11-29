@@ -161,6 +161,7 @@ namespace FFXIVAPP.Plugin.Log
         #region Property Bindings
 
         public static IPluginHost PHost { get; private set; }
+
         public static string PName { get; private set; }
 
         #endregion
