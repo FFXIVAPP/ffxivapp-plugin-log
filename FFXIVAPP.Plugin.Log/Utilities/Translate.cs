@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Log ~ Translate.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -75,7 +75,8 @@ namespace FFXIVAPP.Plugin.Log.Utilities
         private static GoogleTranslateResult ResolveGoogleTranslateResult(string line, bool isJP)
         {
             GoogleTranslateResult result = null;
-            var outLang = GoogleTranslate.Offsets[Settings.Default.TranslateTo].ToString();
+            var outLang = GoogleTranslate.Offsets[Settings.Default.TranslateTo]
+                                         .ToString();
             if (Settings.Default.TranslateJPOnly)
             {
                 if (isJP)

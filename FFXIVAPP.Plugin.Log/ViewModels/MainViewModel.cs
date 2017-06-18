@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Log ~ MainViewModel.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -89,7 +89,8 @@ namespace FFXIVAPP.Plugin.Log.ViewModels
         private static void ManualTranslate(string value)
         {
             value = value.Trim();
-            var outLang = GoogleTranslate.Offsets[Settings.Default.ManualTranslate].ToString();
+            var outLang = GoogleTranslate.Offsets[Settings.Default.ManualTranslate]
+                                         .ToString();
             if (value.Length <= 0)
             {
                 return;

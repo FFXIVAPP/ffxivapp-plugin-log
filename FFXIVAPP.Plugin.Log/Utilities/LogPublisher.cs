@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Log ~ LogPublisher.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -142,7 +142,8 @@ namespace FFXIVAPP.Plugin.Log.Utilities
                     var asciiString = "";
                     for (var j = 0; j < chatLogEntry.Bytes.Length; j++)
                     {
-                        asciiString += chatLogEntry.Bytes[j].ToString(CultureInfo.CurrentUICulture) + " ";
+                        asciiString += chatLogEntry.Bytes[j]
+                                                   .ToString(CultureInfo.CurrentUICulture) + " ";
                     }
                     asciiString = asciiString.Trim();
                     Common.Constants.FD.AppendFlow("", "", asciiString, new[]
