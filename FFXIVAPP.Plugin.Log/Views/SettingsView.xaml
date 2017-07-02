@@ -2,7 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:Converters="http://metro.mahapps.com/winfx/xaml/shared"
-             xmlns:MetroControls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:Plugin="clr-namespace:FFXIVAPP.Plugin.Log"
              xmlns:Properties="clr-namespace:FFXIVAPP.Plugin.Log.Properties"
              xmlns:Utilities="clr-namespace:FFXIVAPP.Common.Utilities;assembly=FFXIVAPP.Common"
@@ -34,22 +34,65 @@
                         <GroupBox Header="{Binding Locale[log_EnableAllHeader],
                                                    Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch IsChecked="{Binding EnableAll,
+                                <controls:ToggleSwitch IsChecked="{Binding EnableAll,
                                                                                 Source={StaticResource Settings}}" />
                             </StackPanel>
                         </GroupBox>
                         <GroupBox Header="{Binding Locale[log_EnableDebugHeader],
                                                    Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch IsChecked="{Binding EnableDebug,
+                                <controls:ToggleSwitch IsChecked="{Binding EnableDebug,
                                                                                 Source={StaticResource Settings}}" />
                             </StackPanel>
                         </GroupBox>
                         <GroupBox Header="{Binding Locale[log_ShowASCIIDebugHeader],
                                                    Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch IsChecked="{Binding ShowASCIIDebug,
+                                <controls:ToggleSwitch IsChecked="{Binding ShowASCIIDebug,
                                                                                 Source={StaticResource Settings}}" />
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Header="{Binding Locale[log_EnableClickThroughHeader],
+                                                   Source={StaticResource PluginViewModel}}">
+                            <StackPanel>
+                                <controls:ToggleSwitch IsChecked="{Binding WidgetClickThroughEnabled,
+                                                                           Source={StaticResource Settings}}" />
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Header="{Binding Locale[log_ShowTitlesOnWidgetsHeader],
+                                                   Source={StaticResource PluginViewModel}}">
+                            <StackPanel>
+                                <controls:ToggleSwitch IsChecked="{Binding ShowTitlesOnWidgets,
+                                                                           Source={StaticResource Settings}}" />
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Header="{Binding Locale[log_WidgetOpacityHeader],
+                                                   Source={StaticResource PluginViewModel}}">
+                            <StackPanel>
+                                <ComboBox Margin="5"
+                                          IsReadOnly="False"
+                                          ItemsSource="{Binding WidgetOpacityList,
+                                                                Source={StaticResource Settings}}"
+                                          SelectedValue="{Binding WidgetOpacity,
+                                                                  Source={StaticResource Settings}}" />
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Header="{Binding Locale[log_TranslationWidgetHeader],
+                                           Source={StaticResource PluginViewModel}}">
+                            <StackPanel>
+                                <DockPanel LastChildFill="True">
+                                    <Button Margin="3"
+                                            Command="{Binding ResetTranslationWidgetCommand,
+                                                      Source={StaticResource SettingsViewModel}}"
+                                            Content="{Binding Locale[log_ResetPositionButtonText],
+                                                      Source={StaticResource PluginViewModel}}"
+                                            DockPanel.Dock="Right" />
+                                    <Button Margin="3"
+                                            Command="{Binding OpenTranslationWidgetCommand,
+                                                      Source={StaticResource SettingsViewModel}}"
+                                            Content="{Binding Locale[log_OpenNowButtonText],
+                                                      Source={StaticResource PluginViewModel}}" />
+                                </DockPanel>
                             </StackPanel>
                         </GroupBox>
                     </StackPanel>
@@ -125,21 +168,21 @@
                         <GroupBox Header="{Binding Locale[log_EnableTranslateHeader],
                                                    Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch IsChecked="{Binding EnableTranslate,
+                                <controls:ToggleSwitch IsChecked="{Binding EnableTranslate,
                                                                                 Source={StaticResource Settings}}" />
                             </StackPanel>
                         </GroupBox>
                         <GroupBox Header="{Binding Locale[log_UseRomanizationHeader],
                                                    Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch IsChecked="{Binding UseRomanization,
+                                <controls:ToggleSwitch IsChecked="{Binding UseRomanization,
                                                                                 Source={StaticResource Settings}}" />
                             </StackPanel>
                         </GroupBox>
                         <GroupBox Header="{Binding Locale[log_TranslateJPOnlyHeader],
                                                    Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch IsChecked="{Binding TranslateJPOnly,
+                                <controls:ToggleSwitch IsChecked="{Binding TranslateJPOnly,
                                                                                 Source={StaticResource Settings}}" />
                             </StackPanel>
                         </GroupBox>
@@ -153,59 +196,83 @@
                         <GroupBox Header="{Binding Locale[log_TranslateSayHeader],
                                                    Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch IsChecked="{Binding TranslateSay,
+                                <controls:ToggleSwitch IsChecked="{Binding TranslateSay,
                                                                                 Source={StaticResource Settings}}" />
                             </StackPanel>
                         </GroupBox>
                         <GroupBox Header="{Binding Locale[log_TranslateTellHeader],
                                                    Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch IsChecked="{Binding TranslateTell,
+                                <controls:ToggleSwitch IsChecked="{Binding TranslateTell,
                                                                                 Source={StaticResource Settings}}" />
                             </StackPanel>
                         </GroupBox>
                         <GroupBox Header="{Binding Locale[log_TranslatePartyHeader],
                                                    Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch IsChecked="{Binding TranslateParty,
+                                <controls:ToggleSwitch IsChecked="{Binding TranslateParty,
                                                                                 Source={StaticResource Settings}}" />
                             </StackPanel>
                         </GroupBox>
                         <GroupBox Header="{Binding Locale[log_TranslateLSHeader],
                                                    Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch IsChecked="{Binding TranslateLS,
+                                <controls:ToggleSwitch IsChecked="{Binding TranslateLS,
                                                                                 Source={StaticResource Settings}}" />
                             </StackPanel>
                         </GroupBox>
                         <GroupBox Header="{Binding Locale[log_TranslateFCHeader],
                                                    Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch IsChecked="{Binding TranslateFC,
+                                <controls:ToggleSwitch IsChecked="{Binding TranslateFC,
                                                                                 Source={StaticResource Settings}}" />
                             </StackPanel>
                         </GroupBox>
                         <GroupBox Header="{Binding Locale[log_TranslateAllianceHeader],
                                                    Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch IsChecked="{Binding TranslateAlliance,
+                                <controls:ToggleSwitch IsChecked="{Binding TranslateAlliance,
                                                                                 Source={StaticResource Settings}}" />
                             </StackPanel>
                         </GroupBox>
                         <GroupBox Header="{Binding Locale[log_TranslateShoutHeader],
                                                    Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch IsChecked="{Binding TranslateShout,
+                                <controls:ToggleSwitch IsChecked="{Binding TranslateShout,
                                                                                 Source={StaticResource Settings}}" />
                             </StackPanel>
                         </GroupBox>
                         <GroupBox Header="{Binding Locale[log_TranslateYellHeader],
                                                    Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <MetroControls:ToggleSwitch IsChecked="{Binding TranslateYell,
+                                <controls:ToggleSwitch IsChecked="{Binding TranslateYell,
                                                                                 Source={StaticResource Settings}}" />
                             </StackPanel>
                         </GroupBox>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem x:Name="SettingsWidgetsTI"
+                     Header="{Binding Locale[log_WidgetSettingsTabHeader],
+                                      Source={StaticResource PluginViewModel}}">
+                <ScrollViewer>
+                    <StackPanel>
+                        <Expander Header="{Binding Locale[log_TranslationWidgetSettingsTabLabel],
+                                                           Source={StaticResource PluginViewModel}}">
+                            <StackPanel>
+                                <GroupBox Header="{Binding Locale[log_UIScaleHeader],
+                                                           Source={StaticResource PluginViewModel}}">
+                                    <StackPanel>
+                                        <ComboBox Margin="5"
+                                                  IsReadOnly="False"
+                                                  ItemsSource="{Binding TranslationWidgetUIScaleList,
+                                                                        Source={StaticResource Settings}}"
+                                                  SelectedValue="{Binding TranslationWidgetUIScale,
+                                                                          Source={StaticResource Settings}}" />
+                                    </StackPanel>
+                                </GroupBox>
+                            </StackPanel>
+                        </Expander>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>

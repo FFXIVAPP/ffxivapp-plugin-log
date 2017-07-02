@@ -20,11 +20,19 @@ using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Log.Properties;
 using FFXIVAPP.Plugin.Log.Views;
+using FFXIVAPP.Plugin.Log.Windows;
+using NLog;
 
 namespace FFXIVAPP.Plugin.Log.Utilities
 {
     internal static class Translate
     {
+        #region Logger
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         /// <summary>
         /// </summary>
         /// <param name="line"></param>
@@ -32,10 +40,18 @@ namespace FFXIVAPP.Plugin.Log.Utilities
         /// <param name="resultOnly"></param>
         public static GoogleTranslateResult GetAutomaticResult(string line, bool isJP, bool resultOnly = false)
         {
+            Logging.Log(Logger, "Begin Translation");
             var timeStampColor = Settings.Default.TimeStampColor.ToString();
             var player = line.Substring(0, line.IndexOf(":", StringComparison.Ordinal)) + ": ";
-            var tmpMessage = line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1);
-            var result = ResolveGoogleTranslateResult(tmpMessage, isJP);
+            var message = line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1);
+
+            Logging.Log(Logger, $"Player [{player}] said [{message}]");
+
+            var result = ResolveGoogleTranslateResult(message, isJP);
+
+            Logging.Log(Logger, $"Translation Result: {result?.Translated}");
+            Logging.Log(Logger, $"Translation Result: {result?.Romanization}");
+
             if (result != null)
             {
                 if (result.Translated.Length <= 0 || String.Equals(line, result.Translated, StringComparison.InvariantCultureIgnoreCase))
@@ -52,6 +68,13 @@ namespace FFXIVAPP.Plugin.Log.Utilities
                 {
                     timeStampColor, "#EAFF00"
                 }, MainView.View.TranslatedFD._FDR);
+                if (TranslationWidget.View.IsVisible)
+                {
+                    Common.Constants.FD.AppendFlow(player, "", result.Translated, new[]
+                    {
+                        timeStampColor, "#EAFF00"
+                    }, TranslationWidget.View.TranslatedFD._FDR);
+                }
             }
             return result;
         }

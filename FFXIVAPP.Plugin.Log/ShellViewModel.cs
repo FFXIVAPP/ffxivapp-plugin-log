@@ -19,6 +19,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using FFXIVAPP.Plugin.Log.Interop;
 using FFXIVAPP.Plugin.Log.Properties;
 using FFXIVAPP.Plugin.Log.Views;
 
@@ -30,6 +31,7 @@ namespace FFXIVAPP.Plugin.Log
         {
             Initializer.LoadSettings();
             Initializer.LoadTabs();
+            Initializer.SetupWidgetTopMost();
             Settings.Default.PropertyChanged += DefaultOnPropertyChanged;
         }
 
@@ -66,6 +68,21 @@ namespace FFXIVAPP.Plugin.Log
                     }
                     catch (Exception ex)
                     {
+                    }
+                    break;
+                case "WidgetClickThroughEnabled":
+                    WinAPI.ToggleClickThrough(Widgets.Instance.TranslationWidget);
+                    break;
+                case "TranslationWidgetUIScale":
+                    try
+                    {
+                        Settings.Default.TranslationWidgetWidth = (int) (600 * Double.Parse(Settings.Default.TranslationWidgetUIScale));
+                        Settings.Default.TranslationWidgetHeight = (int) (400 * Double.Parse(Settings.Default.TranslationWidgetUIScale));
+                    }
+                    catch (Exception)
+                    {
+                        Settings.Default.TranslationWidgetWidth = 600;
+                        Settings.Default.TranslationWidgetHeight = 400;
                     }
                     break;
             }

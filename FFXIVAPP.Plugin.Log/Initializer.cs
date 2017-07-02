@@ -23,6 +23,7 @@ using FFXIVAPP.Common.Controls;
 using FFXIVAPP.Plugin.Log.Helpers;
 using FFXIVAPP.Plugin.Log.Properties;
 using FFXIVAPP.Plugin.Log.Views;
+using FFXIVAPP.Plugin.Log.Windows;
 
 namespace FFXIVAPP.Plugin.Log
 {
@@ -88,12 +89,20 @@ namespace FFXIVAPP.Plugin.Log
             ThemeHelper.SetupColor(ref MainView.View.AllFD);
             ThemeHelper.SetupColor(ref MainView.View.TranslatedFD);
             ThemeHelper.SetupColor(ref MainView.View.DebugFD);
-            foreach (TabItem s in PluginViewModel.Instance.Tabs)
+            ThemeHelper.SetupFont(ref TranslationWidget.View.TranslatedFD);
+            ThemeHelper.SetupFont(ref TranslationWidget.View.TranslatedFD);
+            foreach (var item in PluginViewModel.Instance.Tabs)
             {
-                var flowDocument = (xFlowDocument) s.Content;
+                var tab = (TabItem) item;
+                var flowDocument = (xFlowDocument) tab.Content;
                 ThemeHelper.SetupFont(ref flowDocument);
                 ThemeHelper.SetupColor(ref flowDocument);
             }
+        }
+
+        public static void SetupWidgetTopMost()
+        {
+            WidgetTopMostHelper.HookWidgetTopMost();
         }
 
         #region Declarations

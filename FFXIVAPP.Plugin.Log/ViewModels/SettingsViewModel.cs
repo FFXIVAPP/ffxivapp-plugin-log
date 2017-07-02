@@ -15,12 +15,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using FFXIVAPP.Common.ViewModelBase;
 using FFXIVAPP.Plugin.Log.Helpers;
+using FFXIVAPP.Plugin.Log.Properties;
 using FFXIVAPP.Plugin.Log.Views;
 
 namespace FFXIVAPP.Plugin.Log.ViewModels
@@ -30,11 +32,15 @@ namespace FFXIVAPP.Plugin.Log.ViewModels
         public SettingsViewModel()
         {
             AddTabCommand = new DelegateCommand(AddTab);
+            ResetTranslationWidgetCommand = new DelegateCommand(ResetTranslationWidget);
+            OpenTranslationWidgetCommand = new DelegateCommand(OpenTranslationWidget);
         }
 
         #region Declarations
 
         public ICommand AddTabCommand { get; private set; }
+        public ICommand ResetTranslationWidgetCommand { get; private set; }
+        public ICommand OpenTranslationWidgetCommand { get; private set; }
 
         #endregion
 
@@ -70,6 +76,26 @@ namespace FFXIVAPP.Plugin.Log.ViewModels
                 MainView.View.MainViewTC.SelectedIndex = MainView.View.MainViewTC.Items.Count - 1;
                 ShellView.View.ShellViewTC.SelectedIndex = 0;
             }
+        }
+
+        public void ResetTranslationWidget()
+        {
+            Settings.Default.TranslationWidgetUIScale = Settings.Default.Properties["TranslationWidgetUIScale"]
+                                                                .DefaultValue.ToString();
+            Settings.Default.TranslationWidgetTop = Int32.Parse(Settings.Default.Properties["TranslationWidgetTop"]
+                                                                        .DefaultValue.ToString());
+            Settings.Default.TranslationWidgetLeft = Int32.Parse(Settings.Default.Properties["TranslationWidgetLeft"]
+                                                                         .DefaultValue.ToString());
+            Settings.Default.TranslationWidgetHeight = Int32.Parse(Settings.Default.Properties["TranslationWidgetHeight"]
+                                                                           .DefaultValue.ToString());
+            Settings.Default.TranslationWidgetWidth = Int32.Parse(Settings.Default.Properties["TranslationWidgetWidth"]
+                                                                          .DefaultValue.ToString());
+        }
+
+        public void OpenTranslationWidget()
+        {
+            Settings.Default.ShowTranslationWidgetOnLoad = true;
+            Widgets.Instance.ShowTranslationWidget();
         }
 
         #endregion

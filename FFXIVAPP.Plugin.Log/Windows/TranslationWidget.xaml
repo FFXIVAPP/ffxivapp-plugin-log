@@ -1,0 +1,119 @@
+﻿<Window x:Class="FFXIVAPP.Plugin.Log.Windows.TranslationWidget"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:PluginProperties="clr-namespace:FFXIVAPP.Plugin.Log.Properties"
+        xmlns:ViewModels="clr-namespace:FFXIVAPP.Plugin.Log.Windows"
+        xmlns:commonConverters="clr-namespace:FFXIVAPP.Common.Converters;assembly=FFXIVAPP.Common"
+        xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:widgets="clr-namespace:FFXIVAPP.Plugin.Log"
+        xmlns:controls="clr-namespace:FFXIVAPP.Common.Controls;assembly=FFXIVAPP.Common"
+        Title="TranslationWidget"
+        Width="{Binding TranslationWidgetWidth,
+                        Source={x:Static PluginProperties:Settings.Default},
+                        Mode=TwoWay}"
+        Height="{Binding TranslationWidgetHeight,
+                         Source={x:Static PluginProperties:Settings.Default},
+                         Mode=TwoWay}"
+        MinWidth="100"
+        MinHeight="100"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Closing="TranslationWidget_OnClosing"
+        Left="{Binding TranslationWidgetLeft,
+                       Mode=TwoWay,
+                       Source={x:Static PluginProperties:Settings.Default}}"
+        Opacity="{Binding WidgetOpacity,
+                          Source={x:Static PluginProperties:Settings.Default}}"
+        ResizeMode="CanResizeWithGrip"
+        ShowInTaskbar="False"
+        Top="{Binding TranslationWidgetTop,
+                      Mode=TwoWay,
+                      Source={x:Static PluginProperties:Settings.Default}}"
+        WindowStyle="None">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <commonConverters:VisibilityConverter x:Key="VisibilityConverter" />
+            <x:Static x:Key="PluginViewModel"
+                      Member="widgets:PluginViewModel.Instance" />
+            <x:Static x:Key="TranslationWidgetViewModel"
+                      Member="ViewModels:TranslationWidgetViewModel.Instance" />
+            <x:Static x:Key="Settings"
+                      Member="PluginProperties:Settings.Default" />
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="{Binding TranslationWidgetUIScale,
+                                             Source={StaticResource Settings}}"
+                            ScaleY="{Binding TranslationWidgetUIScale,
+                                             Source={StaticResource Settings}}" />
+        </Grid.LayoutTransform>
+        <DockPanel LastChildFill="True">
+            <StackPanel DockPanel.Dock="Top">
+                <DockPanel LastChildFill="True"
+                           Visibility="{Binding ShowTitlesOnWidgets,
+                                            Source={StaticResource Settings},
+                                            Converter={StaticResource VisibilityConverter}}">
+                    <Border Margin="5 0 5 5"
+                            Background="WhiteSmoke"
+                            BorderBrush="Black"
+                            BorderThickness="1"
+                            CornerRadius="2">
+                        <DockPanel LastChildFill="True">
+                            <Button x:Name="WidgetClose"
+                                    Width="15"
+                                    Height="15"
+                                    Margin="2"
+                                    Click="TranslationWidgetClose_OnClick"
+                                    DockPanel.Dock="Right"
+                                    Padding="0"
+                                    ToolTip="Close">
+                                <Path Data="M0,0 L5,5 M0,5 L5,0"
+                                      Stretch="None"
+                                      Stroke="Black" />
+                            </Button>
+                            <DockPanel Background="WhiteSmoke"
+                                       PreviewMouseDown="TitleBar_OnPreviewMouseDown">
+                                <Grid>
+                                    <TextBlock Grid.Row="0"
+                                               Margin="5 -1"
+                                               HorizontalAlignment="Right"
+                                               FontSize="14"
+                                               FontWeight="Bold"
+                                               Foreground="Black"
+                                               Padding="0"
+                                               Text="{Binding Locale[log_TranslationTitleBar],
+                                                          Source={StaticResource PluginViewModel}}" />
+                                    <TextBlock Grid.Row="0"
+                                               Margin="5 2"
+                                               HorizontalAlignment="Left"
+                                               FontSize="10"
+                                               FontWeight="Bold"
+                                               Foreground="Black"
+                                               Padding="0"
+                                               Text="FFXIV-APP" />
+                                </Grid>
+                            </DockPanel>
+                        </DockPanel>
+                    </Border>
+                </DockPanel>
+            </StackPanel>
+            <Grid DockPanel.Dock="Bottom">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Border Margin="5 0 5 5"
+                        Background="WhiteSmoke"
+                        BorderBrush="Black"
+                        BorderThickness="1"
+                        CornerRadius="2">
+                    <controls:xFlowDocument Margin="0" x:Name="TranslatedFD" />
+                </Border>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</Window>

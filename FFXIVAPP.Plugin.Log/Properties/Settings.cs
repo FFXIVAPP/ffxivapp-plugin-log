@@ -61,6 +61,22 @@ namespace FFXIVAPP.Plugin.Log.Properties
         private void DefaultSettings()
         {
             Constants.Settings.Clear();
+
+            #region Widgets
+
+            Constants.Settings.Add("TranslationWidgetWidth");
+            Constants.Settings.Add("TranslationWidgetHeight");
+            Constants.Settings.Add("TranslationWidgetUIScale");
+            Constants.Settings.Add("ShowTranslationWidgetOnLoad");
+            Constants.Settings.Add("TranslationWidgetTop");
+            Constants.Settings.Add("TranslationWidgetLeft");
+
+            #endregion
+
+            Constants.Settings.Add("WidgetClickThroughEnabled");
+            Constants.Settings.Add("ShowTitlesOnWidgets");
+            Constants.Settings.Add("WidgetOpacity");
+
             Constants.Settings.Add("EnableAll");
             Constants.Settings.Add("EnableDebug");
             Constants.Settings.Add("ShowASCIIDebug");
@@ -187,6 +203,166 @@ namespace FFXIVAPP.Plugin.Log.Properties
                 RaisePropertyChanged();
             }
         }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("0.7")]
+        public string WidgetOpacity
+        {
+            get { return ((string) (this["WidgetOpacity"])); }
+            set
+            {
+                this["WidgetOpacity"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [ApplicationScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>0.5</string>
+  <string>0.6</string>
+  <string>0.7</string>
+  <string>0.8</string>
+  <string>0.9</string>
+  <string>1.0</string>
+</ArrayOfString>")]
+        public StringCollection WidgetOpacityList
+        {
+            get { return ((StringCollection) (this["WidgetOpacityList"])); }
+            set
+            {
+                this["WidgetOpacityList"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("False")]
+        public bool WidgetClickThroughEnabled
+        {
+            get { return ((bool) (this["WidgetClickThroughEnabled"])); }
+            set
+            {
+                this["WidgetClickThroughEnabled"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("True")]
+        public bool ShowTitlesOnWidgets
+        {
+            get { return ((bool) (this["ShowTitlesOnWidgets"])); }
+            set
+            {
+                this["ShowTitlesOnWidgets"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #region Translation Widget
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("600")]
+        public int TranslationWidgetWidth
+        {
+            get { return ((int) (this["TranslationWidgetWidth"])); }
+            set
+            {
+                this["TranslationWidgetWidth"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("400")]
+        public int TranslationWidgetHeight
+        {
+            get { return ((int) (this["TranslationWidgetHeight"])); }
+            set
+            {
+                this["TranslationWidgetHeight"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("1.0")]
+        public string TranslationWidgetUIScale
+        {
+            get { return ((string) (this["TranslationWidgetUIScale"])); }
+            set
+            {
+                this["TranslationWidgetUIScale"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [ApplicationScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>0.8</string>
+  <string>0.9</string>
+  <string>1.0</string>
+  <string>1.1</string>
+  <string>1.2</string>
+  <string>1.3</string>
+  <string>1.4</string>
+  <string>1.5</string>
+</ArrayOfString>")]
+        public StringCollection TranslationWidgetUIScaleList
+        {
+            get { return ((StringCollection) (this["TranslationWidgetUIScaleList"])); }
+        }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("True")]
+        public bool ShowTranslationWidgetOnLoad
+        {
+            get { return ((bool) (this["ShowTranslationWidgetOnLoad"])); }
+            set
+            {
+                this["ShowTranslationWidgetOnLoad"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("100")]
+        public int TranslationWidgetTop
+        {
+            get { return ((int) (this["TranslationWidgetTop"])); }
+            set
+            {
+                this["TranslationWidgetTop"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("400")]
+        public int TranslationWidgetLeft
+        {
+            get { return ((int) (this["TranslationWidgetLeft"])); }
+            set
+            {
+                this["TranslationWidgetLeft"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion
 
         [UserScopedSetting]
         [DebuggerNonUserCode]

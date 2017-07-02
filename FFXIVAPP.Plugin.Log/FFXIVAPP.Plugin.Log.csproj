@@ -76,7 +76,9 @@
     <Compile Include="Helpers\LocaleHelper.cs" />
     <Compile Include="Helpers\TabItemHelper.cs" />
     <Compile Include="Helpers\ThemeHelper.cs" />
+    <Compile Include="Helpers\WidgetTopMostHelper.cs" />
     <Compile Include="Initializer.cs" />
+    <Compile Include="Interop\WinAPI.cs" />
     <Compile Include="Localization\Chinese.cs" />
     <Compile Include="Localization\English.cs" />
     <Compile Include="Localization\French.cs" />
@@ -109,6 +111,11 @@
     </Compile>
     <Compile Include="Views\SampleView.xaml.cs">
       <DependentUpon>SampleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets.cs" />
+    <Compile Include="Windows\TranslationWidgetViewModel.cs" />
+    <Compile Include="Windows\TranslationWidget.xaml.cs">
+      <DependentUpon>TranslationWidget.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +165,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\SampleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TranslationWidget.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
