@@ -19,14 +19,23 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using FFXIVAPP.Common.Models;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Log.Interop;
 using FFXIVAPP.Plugin.Log.Properties;
 using FFXIVAPP.Plugin.Log.Views;
+using NLog;
 
 namespace FFXIVAPP.Plugin.Log
 {
     public sealed class ShellViewModel : INotifyPropertyChanged
     {
+        #region Logger
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         public ShellViewModel()
         {
             Initializer.LoadSettings();
@@ -56,6 +65,7 @@ namespace FFXIVAPP.Plugin.Log
                     }
                     catch (Exception ex)
                     {
+                        Logging.Log(Logger, new LogItem(ex, true));
                     }
                     break;
                 case "EnableDebug":
@@ -68,6 +78,7 @@ namespace FFXIVAPP.Plugin.Log
                     }
                     catch (Exception ex)
                     {
+                        Logging.Log(Logger, new LogItem(ex, true));
                     }
                     break;
                 case "WidgetClickThroughEnabled":

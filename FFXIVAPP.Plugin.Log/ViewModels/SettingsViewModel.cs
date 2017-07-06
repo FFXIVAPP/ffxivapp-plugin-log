@@ -55,23 +55,23 @@ namespace FFXIVAPP.Plugin.Log.ViewModels
             var xRegularExpression = SettingsView.View.TRegEx.Text;
             if (SettingsView.View.Codes.SelectedItems.Count < 1)
             {
-                xValue = "";
+                xValue = string.Empty;
             }
             else
             {
                 xValue = SettingsView.View.Codes.SelectedItems.Cast<object>()
-                                     .Aggregate("", (current, item) => current + (item.ToString()
-                                                                                      .Split(',')[0] + ","))
-                                     .Replace("[", "");
+                                     .Aggregate("", (current, item) => current + item.ToString()
+                                                                                     .Split(',')[0] + ",")
+                                     .Replace("[", string.Empty);
                 xValue = xValue.Substring(0, xValue.Length - 1);
             }
-            if (xKey == "" || xValue == "" || xRegularExpression == "")
+            if (xKey == string.Empty || xValue == string.Empty || xRegularExpression == string.Empty)
             {
             }
             else
             {
                 TabItemHelper.AddTabByName(xKey, xValue, xRegularExpression);
-                SettingsView.View.TName.Text = "";
+                SettingsView.View.TName.Text = string.Empty;
                 SettingsView.View.Codes.UnselectAll();
                 MainView.View.MainViewTC.SelectedIndex = MainView.View.MainViewTC.Items.Count - 1;
                 ShellView.View.ShellViewTC.SelectedIndex = 0;

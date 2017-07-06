@@ -16,12 +16,21 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using FFXIVAPP.Common.Models;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Log.Windows;
+using NLog;
 
 namespace FFXIVAPP.Plugin.Log
 {
     public class Widgets
     {
+        #region Logger
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         private static Widgets _instance;
         private TranslationWidget _translationWidget;
 
@@ -44,6 +53,7 @@ namespace FFXIVAPP.Plugin.Log
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
         }
     }

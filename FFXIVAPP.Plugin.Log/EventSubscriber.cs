@@ -16,13 +16,22 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using FFXIVAPP.Common.Models;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.IPluginInterface.Events;
 using FFXIVAPP.Plugin.Log.Utilities;
+using NLog;
 
 namespace FFXIVAPP.Plugin.Log
 {
     public static class EventSubscriber
     {
+        #region Logger
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         public static void Subscribe()
         {
             Plugin.PHost.NewConstantsEntity += OnNewConstantsEntity;
@@ -85,6 +94,7 @@ namespace FFXIVAPP.Plugin.Log
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
         }
 

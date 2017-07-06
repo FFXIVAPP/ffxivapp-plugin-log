@@ -55,6 +55,17 @@ namespace FFXIVAPP.Plugin.Log.Localization
             Dictionary.Add("log_EnableAllHeader", "Включить все");
             Dictionary.Add("log_TranslateAllianceHeader", "Alliance");
             Dictionary.Add("log_GitHubButtonText", "Страница проекта (GitHub)");
+
+            Dictionary.Add("log_OpenNowButtonText", "Open Now");
+            Dictionary.Add("log_ResetPositionButtonText", "Reset Settings");
+            Dictionary.Add("log_TranslationTitleBar", "[TRANSLATION]");
+            Dictionary.Add("log_TranslationWidgetHeader", "Translation Widget");
+            Dictionary.Add("log_EnableClickThroughHeader", "Enable Click-Through On Widgets");
+            Dictionary.Add("log_WidgetOpacityHeader", "Widget Opacity");
+            Dictionary.Add("log_ShowTitlesOnWidgetsHeader", "Show Titles On Widgets");
+            Dictionary.Add("log_UIScaleHeader", "UI Scale");
+            Dictionary.Add("log_WidgetSettingsTabHeader", "Widget Settings");
+            Dictionary.Add("log_TranslationWidgetSettingsTabLabel", "SETTINGS:TRANSLATION");
             return Dictionary;
         }
     }

@@ -42,11 +42,17 @@ namespace FFXIVAPP.Plugin.Log.Properties
 {
     internal class Settings : ApplicationSettingsBase, INotifyPropertyChanged
     {
+        #region Logger
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         private static Settings _default;
 
         public static Settings Default
         {
-            get { return _default ?? (_default = ((Settings) (Synchronized(new Settings())))); }
+            get { return _default ?? (_default = (Settings) Synchronized(new Settings())); }
         }
 
         public override void Save()
@@ -145,7 +151,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
             }
             catch (Exception ex)
             {
-                Logging.Log(LogManager.GetCurrentClassLogger(), "", ex);
+                Logging.Log(Logger, new LogItem(ex, true));
             }
             RaisePropertyChanged(key);
         }
@@ -157,7 +163,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("#FF000000")]
         public Color ChatBackgroundColor
         {
-            get { return ((Color) (this["ChatBackgroundColor"])); }
+            get { return (Color) this["ChatBackgroundColor"]; }
             set
             {
                 this["ChatBackgroundColor"] = value;
@@ -170,7 +176,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("#FF800080")]
         public Color TimeStampColor
         {
-            get { return ((Color) (this["TimeStampColor"])); }
+            get { return (Color) this["TimeStampColor"]; }
             set
             {
                 this["TimeStampColor"] = value;
@@ -183,7 +189,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("Microsoft Sans Serif, 12pt")]
         public Font ChatFont
         {
-            get { return ((Font) (this["ChatFont"])); }
+            get { return (Font) this["ChatFont"]; }
             set
             {
                 this["ChatFont"] = value;
@@ -196,7 +202,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("100")]
         public Double Zoom
         {
-            get { return ((Double) (this["Zoom"])); }
+            get { return (Double) this["Zoom"]; }
             set
             {
                 this["Zoom"] = value;
@@ -209,7 +215,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("0.7")]
         public string WidgetOpacity
         {
-            get { return ((string) (this["WidgetOpacity"])); }
+            get { return (string) this["WidgetOpacity"]; }
             set
             {
                 this["WidgetOpacity"] = value;
@@ -219,8 +225,8 @@ namespace FFXIVAPP.Plugin.Log.Properties
 
         [ApplicationScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>0.5</string>
   <string>0.6</string>
   <string>0.7</string>
@@ -230,7 +236,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
 </ArrayOfString>")]
         public StringCollection WidgetOpacityList
         {
-            get { return ((StringCollection) (this["WidgetOpacityList"])); }
+            get { return (StringCollection) this["WidgetOpacityList"]; }
             set
             {
                 this["WidgetOpacityList"] = value;
@@ -243,7 +249,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("False")]
         public bool WidgetClickThroughEnabled
         {
-            get { return ((bool) (this["WidgetClickThroughEnabled"])); }
+            get { return (bool) this["WidgetClickThroughEnabled"]; }
             set
             {
                 this["WidgetClickThroughEnabled"] = value;
@@ -256,7 +262,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("True")]
         public bool ShowTitlesOnWidgets
         {
-            get { return ((bool) (this["ShowTitlesOnWidgets"])); }
+            get { return (bool) this["ShowTitlesOnWidgets"]; }
             set
             {
                 this["ShowTitlesOnWidgets"] = value;
@@ -271,7 +277,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("600")]
         public int TranslationWidgetWidth
         {
-            get { return ((int) (this["TranslationWidgetWidth"])); }
+            get { return (int) this["TranslationWidgetWidth"]; }
             set
             {
                 this["TranslationWidgetWidth"] = value;
@@ -284,7 +290,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("400")]
         public int TranslationWidgetHeight
         {
-            get { return ((int) (this["TranslationWidgetHeight"])); }
+            get { return (int) this["TranslationWidgetHeight"]; }
             set
             {
                 this["TranslationWidgetHeight"] = value;
@@ -297,7 +303,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("1.0")]
         public string TranslationWidgetUIScale
         {
-            get { return ((string) (this["TranslationWidgetUIScale"])); }
+            get { return (string) this["TranslationWidgetUIScale"]; }
             set
             {
                 this["TranslationWidgetUIScale"] = value;
@@ -307,8 +313,8 @@ namespace FFXIVAPP.Plugin.Log.Properties
 
         [ApplicationScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>0.8</string>
   <string>0.9</string>
   <string>1.0</string>
@@ -320,7 +326,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
 </ArrayOfString>")]
         public StringCollection TranslationWidgetUIScaleList
         {
-            get { return ((StringCollection) (this["TranslationWidgetUIScaleList"])); }
+            get { return (StringCollection) this["TranslationWidgetUIScaleList"]; }
         }
 
         [UserScopedSetting]
@@ -328,7 +334,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("True")]
         public bool ShowTranslationWidgetOnLoad
         {
-            get { return ((bool) (this["ShowTranslationWidgetOnLoad"])); }
+            get { return (bool) this["ShowTranslationWidgetOnLoad"]; }
             set
             {
                 this["ShowTranslationWidgetOnLoad"] = value;
@@ -341,7 +347,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("100")]
         public int TranslationWidgetTop
         {
-            get { return ((int) (this["TranslationWidgetTop"])); }
+            get { return (int) this["TranslationWidgetTop"]; }
             set
             {
                 this["TranslationWidgetTop"] = value;
@@ -354,7 +360,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("400")]
         public int TranslationWidgetLeft
         {
-            get { return ((int) (this["TranslationWidgetLeft"])); }
+            get { return (int) this["TranslationWidgetLeft"]; }
             set
             {
                 this["TranslationWidgetLeft"] = value;
@@ -369,7 +375,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("False")]
         public bool EnableAll
         {
-            get { return ((bool) (this["EnableAll"])); }
+            get { return (bool) this["EnableAll"]; }
             set
             {
                 this["EnableAll"] = value;
@@ -382,7 +388,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("False")]
         public bool EnableDebug
         {
-            get { return ((bool) (this["EnableDebug"])); }
+            get { return (bool) this["EnableDebug"]; }
             set
             {
                 this["EnableDebug"] = value;
@@ -395,7 +401,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("False")]
         public bool ShowASCIIDebug
         {
-            get { return ((bool) (this["ShowASCIIDebug"])); }
+            get { return (bool) this["ShowASCIIDebug"]; }
             set
             {
                 this["ShowASCIIDebug"] = value;
@@ -408,7 +414,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("True")]
         public bool EnableTranslate
         {
-            get { return ((bool) (this["EnableTranslate"])); }
+            get { return (bool) this["EnableTranslate"]; }
             set
             {
                 this["EnableTranslate"] = value;
@@ -421,7 +427,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("False")]
         public bool UseRomanization
         {
-            get { return ((bool) (this["UseRomanization"])); }
+            get { return (bool) this["UseRomanization"]; }
             set
             {
                 this["UseRomanization"] = value;
@@ -434,7 +440,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("English")]
         public string TranslateTo
         {
-            get { return ((string) (this["TranslateTo"])); }
+            get { return (string) this["TranslateTo"]; }
             set
             {
                 this["TranslateTo"] = value;
@@ -447,7 +453,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("Japanese")]
         public string ManualTranslate
         {
-            get { return ((string) (this["ManualTranslate"])); }
+            get { return (string) this["ManualTranslate"]; }
             set
             {
                 this["ManualTranslate"] = value;
@@ -460,7 +466,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("True")]
         public bool TranslateJPOnly
         {
-            get { return ((bool) (this["TranslateJPOnly"])); }
+            get { return (bool) this["TranslateJPOnly"]; }
             set
             {
                 this["TranslateJPOnly"] = value;
@@ -473,7 +479,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("True")]
         public bool TranslateSay
         {
-            get { return ((bool) (this["TranslateSay"])); }
+            get { return (bool) this["TranslateSay"]; }
             set
             {
                 this["TranslateSay"] = value;
@@ -486,7 +492,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("True")]
         public bool TranslateTell
         {
-            get { return ((bool) (this["TranslateTell"])); }
+            get { return (bool) this["TranslateTell"]; }
             set
             {
                 this["TranslateTell"] = value;
@@ -499,7 +505,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("True")]
         public bool TranslateParty
         {
-            get { return ((bool) (this["TranslateParty"])); }
+            get { return (bool) this["TranslateParty"]; }
             set
             {
                 this["TranslateParty"] = value;
@@ -512,7 +518,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("True")]
         public bool TranslateLS
         {
-            get { return ((bool) (this["TranslateLS"])); }
+            get { return (bool) this["TranslateLS"]; }
             set
             {
                 this["TranslateLS"] = value;
@@ -525,7 +531,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("True")]
         public bool TranslateFC
         {
-            get { return ((bool) (this["TranslateFC"])); }
+            get { return (bool) this["TranslateFC"]; }
             set
             {
                 this["TranslateFC"] = value;
@@ -538,7 +544,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("True")]
         public bool TranslateAlliance
         {
-            get { return ((bool) (this["TranslateAlliance"])); }
+            get { return (bool) this["TranslateAlliance"]; }
             set
             {
                 this["TranslateAlliance"] = value;
@@ -551,7 +557,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("True")]
         public bool TranslateShout
         {
-            get { return ((bool) (this["TranslateShout"])); }
+            get { return (bool) this["TranslateShout"]; }
             set
             {
                 this["TranslateShout"] = value;
@@ -564,7 +570,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
         [DefaultSettingValue("True")]
         public bool TranslateYell
         {
-            get { return ((bool) (this["TranslateYell"])); }
+            get { return (bool) this["TranslateYell"]; }
             set
             {
                 this["TranslateYell"] = value;
@@ -574,8 +580,8 @@ namespace FFXIVAPP.Plugin.Log.Properties
 
         [UserScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>Albanian</string>
   <string>Arabic</string>
   <string>Bulgarian</string>
@@ -621,7 +627,7 @@ namespace FFXIVAPP.Plugin.Log.Properties
 </ArrayOfString>")]
         public StringCollection TranslateLanguages
         {
-            get { return ((StringCollection) (this["TranslateLanguages"])); }
+            get { return (StringCollection) this["TranslateLanguages"]; }
             set { this["TranslateLanguages"] = value; }
         }
 

@@ -23,6 +23,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using FFXIVAPP.Common.Controls;
 using FFXIVAPP.Common.Helpers;
+using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.RegularExpressions;
 using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Memory.Core;
@@ -34,6 +35,12 @@ namespace FFXIVAPP.Plugin.Log.Utilities
 {
     public static class LogPublisher
     {
+        #region Logger
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         public static void Process(ChatLogEntry chatLogEntry)
         {
             try
@@ -43,16 +50,16 @@ namespace FFXIVAPP.Plugin.Log.Utilities
                 var timeStamp = chatLogEntry.TimeStamp.ToString("[HH:mm:ss] ");
                 var line = chatLogEntry.Line.Replace("  ", " ");
                 var rawLine = line;
-                var color = (Constants.Colors.ContainsKey(chatLogEntry.Code)) ? Constants.Colors[chatLogEntry.Code][0] : "FFFFFF";
+                var color = Constants.Colors.ContainsKey(chatLogEntry.Code) ? Constants.Colors[chatLogEntry.Code][0] : "FFFFFF";
                 var isLS = Constants.Linkshells.ContainsKey(chatLogEntry.Code);
                 line = isLS ? Constants.Linkshells[chatLogEntry.Code] + line : line;
-                var playerName = "";
+                var playerName = string.Empty;
 
                 // handle tabs
                 if (CheckMode(chatLogEntry.Code, Constants.ChatPublic))
                 {
                     playerName = line.Substring(0, line.IndexOf(":", StringComparison.Ordinal));
-                    line = line.Replace(playerName + ":", "");
+                    line = line.Replace(playerName + ":", string.Empty);
                 }
                 if (Settings.Default.EnableAll)
                 {
@@ -139,7 +146,7 @@ namespace FFXIVAPP.Plugin.Log.Utilities
                 // handle debug tab
                 if (Settings.Default.ShowASCIIDebug)
                 {
-                    var asciiString = "";
+                    var asciiString = string.Empty;
                     for (var j = 0; j < chatLogEntry.Bytes.Length; j++)
                     {
                         asciiString += chatLogEntry.Bytes[j]
@@ -153,7 +160,7 @@ namespace FFXIVAPP.Plugin.Log.Utilities
                 }
                 if (Settings.Default.EnableDebug)
                 {
-                    var raw = String.Format("{0}[{1}]{2}", chatLogEntry.Raw.Substring(0, 8), chatLogEntry.Code, chatLogEntry.Raw.Substring(12));
+                    var raw = $"{chatLogEntry.Raw.Substring(0, 8)}[{chatLogEntry.Code}]{chatLogEntry.Raw.Substring(12)}";
                     Common.Constants.FD.AppendFlow("", "", raw, new[]
                     {
                         "", "#FFFFFFFF"
@@ -162,7 +169,7 @@ namespace FFXIVAPP.Plugin.Log.Utilities
             }
             catch (Exception ex)
             {
-                Logging.Log(LogManager.GetCurrentClassLogger(), "", ex);
+                Logging.Log(Logger, new LogItem(ex, true));
             }
         }
 
