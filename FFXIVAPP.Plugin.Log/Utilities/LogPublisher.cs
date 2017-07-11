@@ -26,10 +26,10 @@ using FFXIVAPP.Common.Helpers;
 using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.RegularExpressions;
 using FFXIVAPP.Common.Utilities;
-using FFXIVAPP.Memory.Core;
 using FFXIVAPP.Plugin.Log.Properties;
 using FFXIVAPP.Plugin.Log.Views;
 using NLog;
+using Sharlayan.Core;
 
 namespace FFXIVAPP.Plugin.Log.Utilities
 {
