@@ -31,13 +31,12 @@ namespace FFXIVAPP.Plugin.Log
 
         #endregion
 
-        private static Widgets _instance;
+        private static Lazy<Widgets> _instance = new Lazy<Widgets>(() => new Widgets());
         private TranslationWidget _translationWidget;
 
         public static Widgets Instance
         {
-            get { return _instance ?? (_instance = new Widgets()); }
-            set { _instance = value; }
+            get { return _instance.Value; }
         }
 
         public TranslationWidget TranslationWidget

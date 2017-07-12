@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -39,11 +40,11 @@ namespace FFXIVAPP.Plugin.Log.ViewModels
 
         #region Property Bindings
 
-        private static MainViewModel _instance;
+        private static Lazy<MainViewModel> _instance = new Lazy<MainViewModel>(() => new MainViewModel());
 
         public static MainViewModel Instance
         {
-            get { return _instance ?? (_instance = new MainViewModel()); }
+            get { return _instance.Value; }
         }
 
         #endregion

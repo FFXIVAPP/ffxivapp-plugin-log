@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -24,11 +25,11 @@ namespace FFXIVAPP.Plugin.Log.Windows
     {
         #region Property Bindings
 
-        private static TranslationWidgetViewModel _instance;
+        private static Lazy<TranslationWidgetViewModel> _instance = new Lazy<TranslationWidgetViewModel>(() => new TranslationWidgetViewModel());
 
         public static TranslationWidgetViewModel Instance
         {
-            get { return _instance ?? (_instance = new TranslationWidgetViewModel()); }
+            get { return _instance.Value; }
         }
 
         #endregion
