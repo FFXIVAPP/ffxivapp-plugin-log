@@ -7,6 +7,7 @@
              xmlns:Properties="clr-namespace:FFXIVAPP.Plugin.Log.Properties"
              xmlns:ViewModels="clr-namespace:FFXIVAPP.Plugin.Log.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d:DesignHeight="300"
              d:DesignWidth="300"
@@ -15,46 +16,31 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <Converters:VisibilityConverter x:Key="VisibilityConverter" />
-            <x:Static x:Key="MainViewModel"
-                      Member="ViewModels:MainViewModel.Instance" />
-            <x:Static x:Key="PluginViewModel"
-                      Member="Plugin:PluginViewModel.Instance" />
-            <x:Static x:Key="Settings"
-                      Member="Properties:Settings.Default" />
+            <x:Static x:Key="MainViewModel" Member="ViewModels:MainViewModel.Instance" />
+            <x:Static x:Key="PluginViewModel" Member="Plugin:PluginViewModel.Instance" />
+            <x:Static x:Key="Settings" Member="Properties:Settings.Default" />
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid x:Name="LayoutRoot"
-          DataContext="{StaticResource MainViewModel}">
+    <Grid x:Name="LayoutRoot" DataContext="{StaticResource MainViewModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="33" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0">
             <TabControl x:Name="MainViewTC">
                 <TabControl.Resources>
-                    <CollectionViewSource x:Key="ItemsCollectionViewSource"
-                                          Source="{Binding Tabs,
-                                                           Source={StaticResource PluginViewModel}}" />
+                    <CollectionViewSource x:Key="ItemsCollectionViewSource" Source="{Binding Tabs, Source={StaticResource PluginViewModel}}" />
                 </TabControl.Resources>
                 <TabControl.ItemsSource>
                     <CompositeCollection>
-                        <TabItem Header="{Binding Locale[log_AllTabHeader],
-                                                  Source={StaticResource PluginViewModel}}"
-                                 Visibility="{Binding EnableAll,
-                                                      Source={StaticResource Settings},
-                                                      Converter={StaticResource VisibilityConverter}}">
+                        <TabItem Header="{Binding Locale[log_AllTabHeader], Source={StaticResource PluginViewModel}}" Visibility="{Binding EnableAll, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}">
                             <Controls:xFlowDocument x:Name="AllFD" />
                         </TabItem>
-                        <TabItem Header="{Binding Locale[log_TranslatedTabHeader],
-                                                  Source={StaticResource PluginViewModel}}">
+                        <TabItem Header="{Binding Locale[log_TranslatedTabHeader], Source={StaticResource PluginViewModel}}">
                             <Controls:xFlowDocument x:Name="TranslatedFD" />
                         </TabItem>
-                        <TabItem Header="{Binding Locale[log_DebugTabHeader],
-                                                  Source={StaticResource PluginViewModel}}"
-                                 Visibility="{Binding EnableDebug,
-                                                      Source={StaticResource Settings},
-                                                      Converter={StaticResource VisibilityConverter}}">
+                        <TabItem Header="{Binding Locale[log_DebugTabHeader], Source={StaticResource PluginViewModel}}" Visibility="{Binding EnableDebug, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}">
                             <Controls:xFlowDocument x:Name="DebugFD" />
                         </TabItem>
                         <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=ItemsCollectionViewSource}}" />
@@ -63,25 +49,21 @@
             </TabControl>
         </DockPanel>
         <DockPanel Grid.Row="1">
-            <Button Width="27"
+            <Button Width="35"
                     Margin="3"
                     Command="{Binding DeleteTabCommand}"
-                    Content="-" />
+                    Content="{iconPacks:PackIconFontAwesome Kind=Times}" />
             <ComboBox Width="130"
-                      Margin="0 3"
+                      Margin="0,3"
                       IsReadOnly="False"
-                      ItemsSource="{Binding TranslateLanguages,
-                                            Source={StaticResource Settings}}"
-                      SelectedValue="{Binding ManualTranslate,
-                                              Source={StaticResource Settings}}" />
+                      ItemsSource="{Binding TranslateLanguages, Source={StaticResource Settings}}"
+                      SelectedValue="{Binding ManualTranslate, Source={StaticResource Settings}}" />
             <TextBox x:Name="Chatter"
                      Margin="3"
                      VerticalAlignment="Center">
                 <TextBox.InputBindings>
                     <KeyBinding Command="{Binding ManualTranslateCommand}"
-                                CommandParameter="{Binding Path=Text,
-                                                           RelativeSource={RelativeSource AncestorType={x:Type TextBox},
-                                                                                          AncestorLevel=1}}"
+                                CommandParameter="{Binding Path=Text, RelativeSource={RelativeSource AncestorType={x:Type TextBox}, AncestorLevel=1}}"
                                 Gesture="CTRL+Enter" />
                 </TextBox.InputBindings>
             </TextBox>
