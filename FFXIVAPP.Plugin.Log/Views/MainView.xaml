@@ -30,20 +30,25 @@
         <DockPanel Grid.Row="0">
             <TabControl x:Name="MainViewTC">
                 <TabControl.Resources>
-                    <CollectionViewSource x:Key="ItemsCollectionViewSource" Source="{Binding Tabs, Source={StaticResource PluginViewModel}}" />
+                    <CollectionViewSource x:Key="ItemsCollectionViewSource"
+                                          Source="{Binding Tabs, Source={StaticResource PluginViewModel}}" />
                 </TabControl.Resources>
                 <TabControl.ItemsSource>
                     <CompositeCollection>
-                        <TabItem Header="{Binding Locale[log_AllTabHeader], Source={StaticResource PluginViewModel}}" Visibility="{Binding EnableAll, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}">
+                        <TabItem Header="{Binding Locale[log_AllTabHeader], Source={StaticResource PluginViewModel}}"
+                                 Visibility="{Binding EnableAll, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}">
                             <Controls:xFlowDocument x:Name="AllFD" />
                         </TabItem>
-                        <TabItem Header="{Binding Locale[log_TranslatedTabHeader], Source={StaticResource PluginViewModel}}">
+                        <TabItem
+                            Header="{Binding Locale[log_TranslatedTabHeader], Source={StaticResource PluginViewModel}}">
                             <Controls:xFlowDocument x:Name="TranslatedFD" />
                         </TabItem>
-                        <TabItem Header="{Binding Locale[log_DebugTabHeader], Source={StaticResource PluginViewModel}}" Visibility="{Binding EnableDebug, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}">
+                        <TabItem Header="{Binding Locale[log_DebugTabHeader], Source={StaticResource PluginViewModel}}"
+                                 Visibility="{Binding EnableDebug, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}">
                             <Controls:xFlowDocument x:Name="DebugFD" />
                         </TabItem>
-                        <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=ItemsCollectionViewSource}}" />
+                        <CollectionContainer
+                            Collection="{Binding Source={StaticResource ResourceKey=ItemsCollectionViewSource}}" />
                     </CompositeCollection>
                 </TabControl.ItemsSource>
             </TabControl>
