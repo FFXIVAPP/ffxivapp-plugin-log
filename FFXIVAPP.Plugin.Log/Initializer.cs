@@ -1,88 +1,29 @@
-﻿// FFXIVAPP.Plugin.Log ~ Initializer.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Initializer.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   Initializer.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Globalization;
-using System.Windows.Controls;
-using System.Xml.Linq;
-using FFXIVAPP.Common.Controls;
-using FFXIVAPP.Plugin.Log.Helpers;
-using FFXIVAPP.Plugin.Log.Properties;
-using FFXIVAPP.Plugin.Log.Views;
-using FFXIVAPP.Plugin.Log.Windows;
+namespace FFXIVAPP.Plugin.Log {
+    using System.Globalization;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Xml.Linq;
 
-namespace FFXIVAPP.Plugin.Log
-{
-    internal static class Initializer
-    {
+    using FFXIVAPP.Common.Controls;
+    using FFXIVAPP.Plugin.Log.Helpers;
+    using FFXIVAPP.Plugin.Log.Properties;
+    using FFXIVAPP.Plugin.Log.Views;
+    using FFXIVAPP.Plugin.Log.Windows;
+
+    internal static class Initializer {
         /// <summary>
         /// </summary>
-        public static void LoadSettings()
-        {
-            if (Constants.XSettings != null)
-            {
-                Settings.Default.Reset();
-                foreach (var xElement in Constants.XSettings.Descendants()
-                                                  .Elements("Setting"))
-                {
-                    var xKey = (string) xElement.Attribute("Key");
-                    var xValue = (string) xElement.Element("Value");
-                    if (String.IsNullOrWhiteSpace(xKey) || String.IsNullOrWhiteSpace(xValue))
-                    {
-                        return;
-                    }
-                    if (Constants.Settings.Contains(xKey))
-                    {
-                        Settings.Default.SetValue(xKey, xValue, CultureInfo.InvariantCulture);
-                    }
-                    else
-                    {
-                        Constants.Settings.Add(xKey);
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// </summary>
-        public static void LoadTabs()
-        {
-            if (Constants.XSettings != null)
-            {
-                foreach (var xElement in Constants.XSettings.Descendants()
-                                                  .Elements("Tab"))
-                {
-                    var xKey = (string) xElement.Attribute("Key");
-                    var xValue = (string) xElement.Element("Value");
-                    var xRegularExpression = (string) xElement.Element("RegularExpression");
-                    if (String.IsNullOrWhiteSpace(xKey) || String.IsNullOrWhiteSpace(xValue))
-                    {
-                        continue;
-                    }
-                    xRegularExpression = String.IsNullOrWhiteSpace(xRegularExpression) ? "*" : xRegularExpression;
-                    TabItemHelper.AddTabByName(xKey, xValue, xRegularExpression);
-                }
-            }
-        }
-
-        /// <summary>
-        /// </summary>
-        public static void ApplyTheming()
-        {
+        public static void ApplyTheming() {
             ThemeHelper.SetupFont(ref MainView.View.AllFD);
             ThemeHelper.SetupFont(ref MainView.View.TranslatedFD);
             ThemeHelper.SetupFont(ref MainView.View.DebugFD);
@@ -91,8 +32,7 @@ namespace FFXIVAPP.Plugin.Log
             ThemeHelper.SetupColor(ref MainView.View.DebugFD);
             ThemeHelper.SetupFont(ref TranslationWidget.View.TranslatedFD);
             ThemeHelper.SetupFont(ref TranslationWidget.View.TranslatedFD);
-            foreach (var item in PluginViewModel.Instance.Tabs)
-            {
+            foreach (UIElement item in PluginViewModel.Instance.Tabs) {
                 var tab = (TabItem) item;
                 var flowDocument = (xFlowDocument) tab.Content;
                 ThemeHelper.SetupFont(ref flowDocument);
@@ -100,13 +40,50 @@ namespace FFXIVAPP.Plugin.Log
             }
         }
 
-        public static void SetupWidgetTopMost()
-        {
-            WidgetTopMostHelper.HookWidgetTopMost();
+        /// <summary>
+        /// </summary>
+        public static void LoadSettings() {
+            if (Constants.XSettings != null) {
+                Settings.Default.Reset();
+                foreach (XElement xElement in Constants.XSettings.Descendants().Elements("Setting")) {
+                    var xKey = (string) xElement.Attribute("Key");
+                    var xValue = (string) xElement.Element("Value");
+                    if (string.IsNullOrWhiteSpace(xKey) || string.IsNullOrWhiteSpace(xValue)) {
+                        return;
+                    }
+
+                    if (Constants.Settings.Contains(xKey)) {
+                        Settings.Default.SetValue(xKey, xValue, CultureInfo.InvariantCulture);
+                    }
+                    else {
+                        Constants.Settings.Add(xKey);
+                    }
+                }
+            }
         }
 
-        #region Declarations
+        /// <summary>
+        /// </summary>
+        public static void LoadTabs() {
+            if (Constants.XSettings != null) {
+                foreach (XElement xElement in Constants.XSettings.Descendants().Elements("Tab")) {
+                    var xKey = (string) xElement.Attribute("Key");
+                    var xValue = (string) xElement.Element("Value");
+                    var xRegularExpression = (string) xElement.Element("RegularExpression");
+                    if (string.IsNullOrWhiteSpace(xKey) || string.IsNullOrWhiteSpace(xValue)) {
+                        continue;
+                    }
 
-        #endregion
+                    xRegularExpression = string.IsNullOrWhiteSpace(xRegularExpression)
+                                             ? "*"
+                                             : xRegularExpression;
+                    TabItemHelper.AddTabByName(xKey, xValue, xRegularExpression);
+                }
+            }
+        }
+
+        public static void SetupWidgetTopMost() {
+            WidgetTopMostHelper.HookWidgetTopMost();
+        }
     }
 }

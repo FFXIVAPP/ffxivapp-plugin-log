@@ -47,9 +47,10 @@
 
     <Grid x:Name="LayoutRoot">
         <Grid.LayoutTransform>
-            <ScaleTransform ScaleX="{Binding TranslationWidgetUIScale,
+            <ScaleTransform
+                ScaleX="{Binding TranslationWidgetUIScale,
                                              Source={StaticResource Settings}}"
-                            ScaleY="{Binding TranslationWidgetUIScale,
+                ScaleY="{Binding TranslationWidgetUIScale,
                                              Source={StaticResource Settings}}" />
         </Grid.LayoutTransform>
         <DockPanel LastChildFill="True">
