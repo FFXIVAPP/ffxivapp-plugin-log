@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="LogPublisher.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -20,6 +20,7 @@ namespace FFXIVAPP.Plugin.Log.Utilities {
     using FFXIVAPP.Common.Helpers;
     using FFXIVAPP.Common.Models;
     using FFXIVAPP.Common.RegularExpressions;
+    using FFXIVAPP.Common.Translation;
     using FFXIVAPP.Common.Utilities;
     using FFXIVAPP.Plugin.Log.Properties;
     using FFXIVAPP.Plugin.Log.Views;
@@ -27,6 +28,8 @@ namespace FFXIVAPP.Plugin.Log.Utilities {
     using NLog;
 
     using Sharlayan.Core;
+
+    using Constants = FFXIVAPP.Plugin.Log.Constants;
 
     public static class LogPublisher {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -39,8 +42,8 @@ namespace FFXIVAPP.Plugin.Log.Utilities {
                 var line = chatLogItem.Line.Replace("  ", " ");
                 var rawLine = line;
                 var color = Constants.Colors.ContainsKey(chatLogItem.Code)
-                                ? Constants.Colors[chatLogItem.Code][0]
-                                : "FFFFFF";
+                                ? $"#{Constants.Colors[chatLogItem.Code][0]}"
+                                : "#FFFFFF";
                 var isLS = Constants.Linkshells.ContainsKey(chatLogItem.Code);
                 line = isLS
                            ? Constants.Linkshells[chatLogItem.Code] + line
@@ -55,14 +58,10 @@ namespace FFXIVAPP.Plugin.Log.Utilities {
 
                 if (Settings.Default.EnableAll) {
                     Common.Constants.FD.AppendFlow(
-                        timeStamp,
-                        playerName,
-                        line,
-                        new[] {
+                        timeStamp, playerName, line, new[] {
                             timeStampColor,
-                            "#" + color
-                        },
-                        MainView.View.AllFD._FDR);
+                            color,
+                        }, MainView.View.AllFD._FDR);
                 }
 
                 DispatcherHelper.Invoke(
@@ -93,50 +92,55 @@ namespace FFXIVAPP.Plugin.Log.Utilities {
 
                             if (resuccess && flowDoc.Codes.Items.Contains(chatLogItem.Code)) {
                                 Common.Constants.FD.AppendFlow(
-                                    timeStamp,
-                                    playerName,
-                                    line,
-                                    new[] {
+                                    timeStamp, playerName, line, new[] {
                                         timeStampColor,
-                                        "#" + color
-                                    },
-                                    flowDoc._FDR);
+                                        color,
+                                    }, flowDoc._FDR);
                             }
                         }
                     });
 
+                TranslationResult translationResult = null;
                 // handle translation
                 if (Settings.Default.EnableTranslate) {
+                    if (CheckMode(chatLogItem.Code, Constants.ChatNovice) && Settings.Default.TranslateNovice) {
+                        Translate.GetAutomaticResult(rawLine, chatLogItem.JP, color: color);
+                    }
+
                     if (CheckMode(chatLogItem.Code, Constants.ChatSay) && Settings.Default.TranslateSay) {
-                        Translate.GetAutomaticResult(rawLine, chatLogItem.JP);
+                        Translate.GetAutomaticResult(rawLine, chatLogItem.JP, color: color);
                     }
 
                     if (CheckMode(chatLogItem.Code, Constants.ChatTell) && Settings.Default.TranslateTell) {
-                        Translate.GetAutomaticResult(rawLine, chatLogItem.JP);
+                        Translate.GetAutomaticResult(rawLine, chatLogItem.JP, color: color);
                     }
 
                     if (CheckMode(chatLogItem.Code, Constants.ChatParty) && Settings.Default.TranslateParty) {
-                        Translate.GetAutomaticResult(rawLine, chatLogItem.JP);
+                        Translate.GetAutomaticResult(rawLine, chatLogItem.JP, color: color);
                     }
 
                     if (CheckMode(chatLogItem.Code, Constants.ChatShout) && Settings.Default.TranslateShout) {
-                        Translate.GetAutomaticResult(rawLine, chatLogItem.JP);
+                        Translate.GetAutomaticResult(rawLine, chatLogItem.JP, color: color);
                     }
 
                     if (CheckMode(chatLogItem.Code, Constants.ChatYell) && Settings.Default.TranslateYell) {
-                        Translate.GetAutomaticResult(rawLine, chatLogItem.JP);
+                        Translate.GetAutomaticResult(rawLine, chatLogItem.JP, color: color);
+                    }
+
+                    if (CheckMode(chatLogItem.Code, Constants.ChatCWLS) && Settings.Default.TranslateCWLS) {
+                        Translate.GetAutomaticResult(rawLine, chatLogItem.JP, color: color);
                     }
 
                     if (CheckMode(chatLogItem.Code, Constants.ChatLS) && Settings.Default.TranslateLS) {
-                        Translate.GetAutomaticResult(rawLine, chatLogItem.JP);
+                        Translate.GetAutomaticResult(rawLine, chatLogItem.JP, color: color);
                     }
 
                     if (CheckMode(chatLogItem.Code, Constants.ChatFC) && Settings.Default.TranslateFC) {
-                        Translate.GetAutomaticResult(rawLine, chatLogItem.JP);
+                        Translate.GetAutomaticResult(rawLine, chatLogItem.JP, color: color);
                     }
 
                     if (CheckMode(chatLogItem.Code, Constants.ChatAlliance) && Settings.Default.TranslateAlliance) {
-                        Translate.GetAutomaticResult(rawLine, chatLogItem.JP);
+                        Translate.GetAutomaticResult(rawLine, chatLogItem.JP, color: color);
                     }
                 }
 
@@ -149,27 +153,19 @@ namespace FFXIVAPP.Plugin.Log.Utilities {
 
                     asciiString = asciiString.Trim();
                     Common.Constants.FD.AppendFlow(
-                        string.Empty,
-                        string.Empty,
-                        asciiString,
-                        new[] {
+                        string.Empty, string.Empty, asciiString, new[] {
                             string.Empty,
-                            "#FFFFFFFF"
-                        },
-                        MainView.View.DebugFD._FDR);
+                            "#FFFFFFFF",
+                        }, MainView.View.DebugFD._FDR);
                 }
 
                 if (Settings.Default.EnableDebug) {
                     var raw = $"{chatLogItem.Raw.Substring(0, 8)}[{chatLogItem.Code}]{chatLogItem.Raw.Substring(12)}";
                     Common.Constants.FD.AppendFlow(
-                        string.Empty,
-                        string.Empty,
-                        raw,
-                        new[] {
+                        string.Empty, string.Empty, raw, new[] {
                             string.Empty,
-                            "#FFFFFFFF"
-                        },
-                        MainView.View.DebugFD._FDR);
+                            "#FFFFFFFF",
+                        }, MainView.View.DebugFD._FDR);
                 }
             }
             catch (Exception ex) {

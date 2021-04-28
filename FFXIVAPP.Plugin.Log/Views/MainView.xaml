@@ -69,7 +69,7 @@
                 <TextBox.InputBindings>
                     <KeyBinding Command="{Binding ManualTranslateCommand}"
                                 CommandParameter="{Binding Path=Text, RelativeSource={RelativeSource AncestorType={x:Type TextBox}, AncestorLevel=1}}"
-                                Gesture="CTRL+Enter" />
+                                Key="Enter" Modifiers="Control" />
                 </TextBox.InputBindings>
             </TextBox>
         </DockPanel>

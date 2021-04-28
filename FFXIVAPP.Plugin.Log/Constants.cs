@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Constants.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright(c) 2020 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -21,12 +21,27 @@ namespace FFXIVAPP.Plugin.Log {
     public static class Constants {
         public const string LibraryPack = "pack://application:,,,/FFXIVAPP.Plugin.Log;component/";
 
+        public static readonly string[] ChatNovice = {
+            "001B"
+        };
+
         public static readonly string[] ChatAlliance = {
             "000F"
         };
 
         public static readonly string[] ChatFC = {
             "0018"
+        };
+
+        public static readonly string[] ChatCWLS = {
+            "0025",
+            "0026",
+            "0027",
+            "0028",
+            "0029",
+            "002A",
+            "002B",
+            "002C"
         };
 
         public static readonly string[] ChatLS = {

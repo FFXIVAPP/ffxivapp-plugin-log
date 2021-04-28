@@ -162,12 +162,53 @@
                                     IsChecked="{Binding TranslateJPOnly, Source={StaticResource Settings}}" />
                             </StackPanel>
                         </GroupBox>
+                        <GroupBox
+                            Header="{Binding Locale[log_TranslationProviderHeader], Source={StaticResource PluginViewModel}}">
+                            <StackPanel>
+                                <ComboBox x:Name="TranslationProvider"
+                                          Margin="5"
+                                          IsReadOnly="False"
+                                          ItemsSource="{Binding TranslationProviders, Source={StaticResource Settings}}"
+                                          SelectedValue="{Binding TranslationProvider, Source={StaticResource Settings}}" />
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox
+                            Header="{Binding Locale[log_GoogleServiceKeyHeader], Source={StaticResource PluginViewModel}}">
+                            <StackPanel>
+                                <TextBox x:Name="GoogleServiceKey"
+                                         Margin="5"
+                                         Text="{Binding GoogleServiceKey, Source={StaticResource Settings}}" />
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox
+                            Header="{Binding Locale[log_CognitiveServiceKeyHeader], Source={StaticResource PluginViewModel}}">
+                            <StackPanel>
+                                <TextBox x:Name="CognitiveServiceKey"
+                                         Margin="5"
+                                         Text="{Binding CognitiveServiceKey, Source={StaticResource Settings}}" />
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox
+                            Header="{Binding Locale[log_CognitiveServiceRegionHeader], Source={StaticResource PluginViewModel}}">
+                            <StackPanel>
+                                <TextBox x:Name="CognitiveServiceRegion"
+                                         Margin="5"
+                                         Text="{Binding CognitiveServiceRegion, Source={StaticResource Settings}}" />
+                            </StackPanel>
+                        </GroupBox>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="{Binding Locale[log_TranslateableChatTabHeader], Source={StaticResource PluginViewModel}}">
                 <ScrollViewer>
                     <StackPanel>
+                        <GroupBox
+                            Header="{Binding Locale[log_TranslateNoviceHeader], Source={StaticResource PluginViewModel}}">
+                            <StackPanel>
+                                <controls:ToggleSwitch
+                                    IsChecked="{Binding TranslateNovice, Source={StaticResource Settings}}" />
+                            </StackPanel>
+                        </GroupBox>
                         <GroupBox
                             Header="{Binding Locale[log_TranslateSayHeader], Source={StaticResource PluginViewModel}}">
                             <StackPanel>

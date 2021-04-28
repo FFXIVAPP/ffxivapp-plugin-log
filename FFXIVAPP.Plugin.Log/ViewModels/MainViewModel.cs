@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="MainViewModel.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright(c) 2020 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -18,6 +18,7 @@ namespace FFXIVAPP.Plugin.Log.ViewModels {
 
     using FFXIVAPP.Common.Models;
     using FFXIVAPP.Common.RegularExpressions;
+    using FFXIVAPP.Common.Translation;
     using FFXIVAPP.Common.Utilities;
     using FFXIVAPP.Common.ViewModelBase;
     using FFXIVAPP.Plugin.Log.Properties;
@@ -69,15 +70,15 @@ namespace FFXIVAPP.Plugin.Log.ViewModels {
         /// <param name="value"> </param>
         private static void ManualTranslate(string value) {
             value = value.Trim();
-            var outLang = GoogleTranslate.Offsets[Settings.Default.ManualTranslate].ToString();
+            var toLanguage = Common.Translation.Constants.LanguageMap[Settings.Default.ManualTranslate].ToString();
             if (value.Length <= 0) {
                 return;
             }
 
-            GoogleTranslateResult tmpTranString = Translate.GetManualResult(value, outLang, false);
+            var result = Translate.GetManualResult(value, toLanguage, false);
             MainView.View.Chatter.Text = Settings.Default.UseRomanization
-                                             ? tmpTranString.Romanization
-                                             : tmpTranString.Translated;
+                                             ? result.Romanization
+                                             : result.Translated;
         }
 
         private void RaisePropertyChanged([CallerMemberName] string caller = "") {

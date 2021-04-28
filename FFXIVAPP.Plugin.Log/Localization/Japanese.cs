@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Japanese.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright(c) 2020 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -38,6 +38,10 @@ namespace FFXIVAPP.Plugin.Log.Localization {
             Dictionary.Add("log_TranslateJPOnlyHeader", "日本語のみ翻訳する");
             Dictionary.Add("log_TranslateSettingsTabHeader", "翻訳オプション");
             Dictionary.Add("log_TranslateToHeader", "翻訳先言語");
+            Dictionary.Add("log_TranslationProviderHeader", "Translation Provider");
+            Dictionary.Add("log_CognitiveServiceKeyHeader", "Cognitive Service Key");
+            Dictionary.Add("log_CognitiveServiceRegionHeader", "Cognitive Service Region");
+            Dictionary.Add("log_TranslateNoviceHeader", "Novice");
             Dictionary.Add("log_TranslateSayHeader", "Sayを翻訳する");
             Dictionary.Add("log_TranslateShoutHeader", "Shoutを翻訳する");
             Dictionary.Add("log_TranslateTellHeader", "Tellを翻訳する");

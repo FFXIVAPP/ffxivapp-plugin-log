@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Settings.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -49,9 +49,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("#FF000000")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("#FF000000"),]
         public Color ChatBackgroundColor {
             get {
                 return (Color) this["ChatBackgroundColor"];
@@ -63,9 +63,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("Microsoft Sans Serif, 12pt")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("Microsoft Sans Serif, 12pt"),]
         public Font ChatFont {
             get {
                 return (Font) this["ChatFont"];
@@ -77,9 +77,51 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("False")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue(""),]
+        public string CognitiveServiceKey {
+            get {
+                return (string) this["CognitiveServiceKey"];
+            }
+
+            set {
+                this["CognitiveServiceKey"] = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue(""),]
+        public string GoogleServiceKey {
+            get {
+                return (string) this["GoogleServiceKey"];
+            }
+
+            set {
+                this["GoogleServiceKey"] = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue(""),]
+        public string CognitiveServiceRegion {
+            get {
+                return (string) this["CognitiveServiceRegion"];
+            }
+
+            set {
+                this["CognitiveServiceRegion"] = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("False"),]
         public bool EnableAll {
             get {
                 return (bool) this["EnableAll"];
@@ -91,9 +133,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("False")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("False"),]
         public bool EnableDebug {
             get {
                 return (bool) this["EnableDebug"];
@@ -105,9 +147,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("True")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("True"),]
         public bool EnableTranslate {
             get {
                 return (bool) this["EnableTranslate"];
@@ -119,9 +161,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("Japanese")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("Japanese"),]
         public string ManualTranslate {
             get {
                 return (string) this["ManualTranslate"];
@@ -133,9 +175,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("False")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("False"),]
         public bool ShowASCIIDebug {
             get {
                 return (bool) this["ShowASCIIDebug"];
@@ -147,9 +189,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("True")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("True"),]
         public bool ShowTitlesOnWidgets {
             get {
                 return (bool) this["ShowTitlesOnWidgets"];
@@ -161,9 +203,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("True")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("True"),]
         public bool ShowTranslationWidgetOnLoad {
             get {
                 return (bool) this["ShowTranslationWidgetOnLoad"];
@@ -175,9 +217,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("#FF800080")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("#FF800080"),]
         public Color TimeStampColor {
             get {
                 return (Color) this["TimeStampColor"];
@@ -189,9 +231,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("True")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("True"),]
         public bool TranslateAlliance {
             get {
                 return (bool) this["TranslateAlliance"];
@@ -203,9 +245,23 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("True")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("True"),]
+        public bool TranslateCWLS {
+            get {
+                return (bool) this["TranslateCWLS"];
+            }
+
+            set {
+                this["TranslateCWLS"] = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("True"),]
         public bool TranslateFC {
             get {
                 return (bool) this["TranslateFC"];
@@ -217,9 +273,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("True")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("True"),]
         public bool TranslateJPOnly {
             get {
                 return (bool) this["TranslateJPOnly"];
@@ -231,8 +287,8 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
         [DefaultSettingValue(
             @"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
@@ -278,7 +334,7 @@ namespace FFXIVAPP.Plugin.Log.Properties {
   <string>Turkish</string>
   <string>Ukrainian</string>
   <string>Vietnamese</string>
-</ArrayOfString>")]
+</ArrayOfString>"),]
         public StringCollection TranslateLanguages {
             get {
                 return (StringCollection) this["TranslateLanguages"];
@@ -289,9 +345,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("True")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("True"),]
         public bool TranslateLS {
             get {
                 return (bool) this["TranslateLS"];
@@ -303,9 +359,23 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("True")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("True"),]
+        public bool TranslateNovice {
+            get {
+                return (bool) this["TranslateNovice"];
+            }
+
+            set {
+                this["TranslateNovice"] = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("True"),]
         public bool TranslateParty {
             get {
                 return (bool) this["TranslateParty"];
@@ -317,9 +387,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("True")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("True"),]
         public bool TranslateSay {
             get {
                 return (bool) this["TranslateSay"];
@@ -331,9 +401,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("True")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("True"),]
         public bool TranslateShout {
             get {
                 return (bool) this["TranslateShout"];
@@ -345,9 +415,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("True")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("True"),]
         public bool TranslateTell {
             get {
                 return (bool) this["TranslateTell"];
@@ -359,9 +429,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("English")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("English"),]
         public string TranslateTo {
             get {
                 return (string) this["TranslateTo"];
@@ -373,9 +443,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("True")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("True"),]
         public bool TranslateYell {
             get {
                 return (bool) this["TranslateYell"];
@@ -387,9 +457,41 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("400")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("Google"),]
+        public string TranslationProvider {
+            get {
+                return (string) this["TranslationProvider"];
+            }
+
+            set {
+                this["TranslationProvider"] = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue(
+            @"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>Google</string>
+  <string>Cognitive</string>
+</ArrayOfString>"),]
+        public StringCollection TranslationProviders {
+            get {
+                return (StringCollection) this["TranslationProviders"];
+            }
+
+            set {
+                this["TranslationProviders"] = value;
+            }
+        }
+
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("400"),]
         public int TranslationWidgetHeight {
             get {
                 return (int) this["TranslationWidgetHeight"];
@@ -401,9 +503,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("400")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("400"),]
         public int TranslationWidgetLeft {
             get {
                 return (int) this["TranslationWidgetLeft"];
@@ -415,9 +517,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("100")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("100"),]
         public int TranslationWidgetTop {
             get {
                 return (int) this["TranslationWidgetTop"];
@@ -429,9 +531,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("1.0")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("1.0"),]
         public string TranslationWidgetUIScale {
             get {
                 return (string) this["TranslationWidgetUIScale"];
@@ -443,8 +545,8 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [ApplicationScopedSetting]
-        [DebuggerNonUserCode]
+        [ApplicationScopedSetting,]
+        [DebuggerNonUserCode,]
         [DefaultSettingValue(
             @"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
@@ -456,16 +558,16 @@ namespace FFXIVAPP.Plugin.Log.Properties {
   <string>1.3</string>
   <string>1.4</string>
   <string>1.5</string>
-</ArrayOfString>")]
+</ArrayOfString>"),]
         public StringCollection TranslationWidgetUIScaleList {
             get {
                 return (StringCollection) this["TranslationWidgetUIScaleList"];
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("600")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("600"),]
         public int TranslationWidgetWidth {
             get {
                 return (int) this["TranslationWidgetWidth"];
@@ -477,9 +579,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("False")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("False"),]
         public bool UseRomanization {
             get {
                 return (bool) this["UseRomanization"];
@@ -491,9 +593,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("False")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("False"),]
         public bool WidgetClickThroughEnabled {
             get {
                 return (bool) this["WidgetClickThroughEnabled"];
@@ -505,9 +607,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("0.7")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("0.7"),]
         public string WidgetOpacity {
             get {
                 return (string) this["WidgetOpacity"];
@@ -519,8 +621,8 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [ApplicationScopedSetting]
-        [DebuggerNonUserCode]
+        [ApplicationScopedSetting,]
+        [DebuggerNonUserCode,]
         [DefaultSettingValue(
             @"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
@@ -530,7 +632,7 @@ namespace FFXIVAPP.Plugin.Log.Properties {
   <string>0.8</string>
   <string>0.9</string>
   <string>1.0</string>
-</ArrayOfString>")]
+</ArrayOfString>"),]
         public StringCollection WidgetOpacityList {
             get {
                 return (StringCollection) this["WidgetOpacityList"];
@@ -542,9 +644,9 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             }
         }
 
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("100")]
+        [UserScopedSetting,]
+        [DebuggerNonUserCode,]
+        [DefaultSettingValue("100"),]
         public double Zoom {
             get {
                 return (double) this["Zoom"];
@@ -615,16 +717,12 @@ namespace FFXIVAPP.Plugin.Log.Properties {
         private void DefaultSettings() {
             Constants.Settings.Clear();
 
-            
-
             Constants.Settings.Add("TranslationWidgetWidth");
             Constants.Settings.Add("TranslationWidgetHeight");
             Constants.Settings.Add("TranslationWidgetUIScale");
             Constants.Settings.Add("ShowTranslationWidgetOnLoad");
             Constants.Settings.Add("TranslationWidgetTop");
             Constants.Settings.Add("TranslationWidgetLeft");
-
-            
 
             Constants.Settings.Add("WidgetClickThroughEnabled");
             Constants.Settings.Add("ShowTitlesOnWidgets");
@@ -636,6 +734,10 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             Constants.Settings.Add("EnableTranslate");
             Constants.Settings.Add("UseRomanization");
             Constants.Settings.Add("TranslateTo");
+            Constants.Settings.Add("TranslationProvider");
+            Constants.Settings.Add("GoogleServiceKey");
+            Constants.Settings.Add("CognitiveServiceKey");
+            Constants.Settings.Add("CognitiveServiceRegion");
             Constants.Settings.Add("ManualTranslate");
             Constants.Settings.Add("TranslateJPOnly");
             Constants.Settings.Add("TranslateSay");
@@ -648,7 +750,7 @@ namespace FFXIVAPP.Plugin.Log.Properties {
             Constants.Settings.Add("Zoom");
         }
 
-        private void RaisePropertyChanged([CallerMemberName] string caller = "") {
+        private void RaisePropertyChanged([CallerMemberName,] string caller = "") {
             this.PropertyChanged(this, new PropertyChangedEventArgs(caller));
         }
 
@@ -671,8 +773,8 @@ namespace FFXIVAPP.Plugin.Log.Properties {
                     List<XValuePair> keyPairList = new List<XValuePair> {
                         new XValuePair {
                             Key = "Value",
-                            Value = xValue
-                        }
+                            Value = xValue,
+                        },
                     };
                     XmlHelper.SaveXmlNode(Constants.XSettings, "Settings", "Setting", xKey, keyPairList);
                 }
@@ -703,12 +805,12 @@ namespace FFXIVAPP.Plugin.Log.Properties {
                 keyPairList.Add(
                     new XValuePair {
                         Key = "Value",
-                        Value = xValue
+                        Value = xValue,
                     });
                 keyPairList.Add(
                     new XValuePair {
                         Key = "RegularExpression",
-                        Value = xRegularExpression
+                        Value = xRegularExpression,
                     });
                 XElement element = enumerable.FirstOrDefault(e => e.Attribute("Key").Value == xKey);
                 if (element == null) {
